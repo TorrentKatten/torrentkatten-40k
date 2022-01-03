@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    bootstrap-servers: PLAINTEXT://localhost:9092
+    properties:
+      schema.registry.url: http://127.0.0.1:8081
+    consumer:
+      group-id: koliox
+      auto-offset-reset: earliest
+      key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      value-deserializer: "io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer"
+    producer:
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: "io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializer"
