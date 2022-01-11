@@ -9,6 +9,9 @@ service Simple {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (stream HelloReply) {
   }
+
+  rpc SayGoodbye (GoodbyeRequest) returns (stream GoodbyeResponse) {
+  }
 }
 
 // The request message containing the user's name.
@@ -18,5 +21,15 @@ message HelloRequest {
 
 // The response message containing the greetings
 message HelloReply {
+  string message = 1;
+}
+
+// The request message containing the user's name.
+message GoodbyeRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message GoodbyeResponse {
   string message = 1;
 }
