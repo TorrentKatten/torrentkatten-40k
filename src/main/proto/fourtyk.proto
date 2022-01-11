@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package se.torrentkatten.fourtyk.api;
+option java_multiple_files = true;
+
+service FourtyKService {
+  rpc CreateGame (GameDTO) returns (GameHandle) {
+  }
+
+  rpc FindGame (GameHandle) returns (GameDTO) {
+  }
+
+  rpc AddResult (GameResultDTO) returns (GameDTO) {
+  }
+}
+
+message PlayerDTO {
+  string faction = 1;
+}
+
+message GameDTO {
+  string name = 2;
+  PlayerDTO attacker = 3;
+  PlayerDTO defender = 4;
+  optional GameResultDTO result = 5;
+}
+
+message GameHandle {
+  string uuid = 1;
+}
+
+message GameResultDTO {
+  int32 attacker_score = 1;
+  int32 defender_score = 2;
+}
+

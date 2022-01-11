@@ -1,15 +1,14 @@
-package se.torrentkatten.koliox;
+package se.torrentkatten.fourtyk;
 
 import org.springframework.boot.Banner
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class App
+open class FourtyKApp
 
 fun main(args: Array<String>) {
-    runApplication<App>(*args) {
+    runApplication<FourtyKApp>(*args) {
         setBannerMode(Banner.Mode.OFF)
     }
 }

@@ -1,15 +1,15 @@
 spring:
   kafka:
     bootstrap-servers: PLAINTEXT://localhost:9092
-    properties:
-      schema.registry.url: http://127.0.0.1:8081
-      auto.register.schemas: true
-      use.latest.version: true
     consumer:
-      group-id: koliox
+      group-id: fourtyk
       auto-offset-reset: earliest
       key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
       value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
     producer:
       key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
       value-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+
+
+
+
