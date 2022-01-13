@@ -1,28 +1,37 @@
-package se.torrentkatten.fourtyk.api
+package se.torrentkatten.api
 
-import io.grpc.stub.StreamObserver
 import net.devh.boot.grpc.server.service.GrpcService
 import org.springframework.beans.factory.annotation.Autowired
+import se.torrentkatten.fourtyk.api.FourtyKServiceGrpcKt
+import se.torrentkatten.fourtyk.api.GameDTO
+import se.torrentkatten.fourtyk.api.GameHandle
+import se.torrentkatten.fourtyk.api.GameResultDTO
+import se.torrentkatten.fourtyk.api.gameDTO
+import se.torrentkatten.fourtyk.api.gameHandle
 import se.torrentkatten.fourtyk.service.Games
-import java.util.*
+import java.util.UUID
 
 @GrpcService
 class GameService(@Autowired private val games: Games) :
-    FourtyKServiceGrpc.FourtyKServiceImplBase() {
+    FourtyKServiceGrpcKt.FourtyKServiceCoroutineImplBase() {
 
-    override fun createGame(request: GameDTO, responseObserver: StreamObserver<GameHandle>) {
-        responseObserver.onNext(GameHandle.newBuilder().setUuid(games.createGame(request)).build())
-        responseObserver.onCompleted()
+
+    override suspend fun createGame(request: GameDTO): GameHandle {
+        return gameHandle {
+            uuid = games.createGame(request)
+        }
     }
 
-    override fun findGame(request: GameHandle, responseObserver: StreamObserver<GameDTO>) {
+    override suspend fun findGame(request: GameHandle): GameDTO {
         val game = games.findGame(UUID.fromString(request.uuid))
 
-        responseObserver.onNext(GameDTO.newBuilder().build())
-        responseObserver.onCompleted()
+        return gameDTO {
+            name = game.name
+
+        }
     }
 
-    override fun addResult(request: GameResultDTO?, responseObserver: StreamObserver<GameDTO>) {
-        super.addResult(request, responseObserver)
+    override suspend fun addResult(request: GameResultDTO): GameDTO {
+        return super.addResult(request)
     }
 }

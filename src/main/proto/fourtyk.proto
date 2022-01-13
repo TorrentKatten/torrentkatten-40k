@@ -33,4 +33,3 @@ message GameResultDTO {
   int32 attacker_score = 1;
   int32 defender_score = 2;
 }
-
