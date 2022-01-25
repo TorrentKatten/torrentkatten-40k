@@ -1,13 +1,7 @@
-package se.torrentkatten.api
+package se.torrentkatten.fourtyk.api
 
 import net.devh.boot.grpc.server.service.GrpcService
 import org.springframework.beans.factory.annotation.Autowired
-import se.torrentkatten.fourtyk.api.FourtyKServiceGrpcKt
-import se.torrentkatten.fourtyk.api.GameDTO
-import se.torrentkatten.fourtyk.api.GameHandle
-import se.torrentkatten.fourtyk.api.GameResultDTO
-import se.torrentkatten.fourtyk.api.gameDTO
-import se.torrentkatten.fourtyk.api.gameHandle
 import se.torrentkatten.fourtyk.service.Games
 import java.util.UUID
 
@@ -17,6 +11,7 @@ class GameService(@Autowired private val games: Games) :
 
 
     override suspend fun createGame(request: GameDTO): GameHandle {
+        println("TEST")
         return gameHandle {
             uuid = games.createGame(request)
         }
